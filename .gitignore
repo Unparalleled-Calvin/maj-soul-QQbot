@@ -1,0 +1,11 @@
+#文件夹
+data
+logs
+cqLogs
+__pycache__
+
+#文件
+device.json
+go-cqhttp.exe
+go-cqhttp
+session.token
