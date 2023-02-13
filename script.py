@@ -1,17 +1,15 @@
 import logging
 
-from pycqBot.cqApi import Message, cqHttpApi, cqLog
+from pycqBot.cqApi import cqHttpApi, cqLog
 
 from instr.divine import divine
-# 启用日志 默认日志等级 DEBUG
+from instr.info import info
+
+# 启用日志 默认日志等级 INFO
 cqLog(logging.INFO)
 
 cqapi = cqHttpApi()
 
-# echo 函数
-def echo(commandData, message: Message):
-    # 回复消息
-    message.reply(" ".join(commandData))
 
 bot = cqapi.create_bot(
     group_id_list=[
@@ -22,13 +20,12 @@ bot = cqapi.create_bot(
 )
 
 # 设置指令为 echo
-bot.command(echo, "echo", {
-    # echo 帮助
-    "help": [
-        "#echo - 输出文本"
-    ]
-}).command(divine, "抽签", {
+bot.command(divine, "抽签", {
     "help": [
         "#抽签 - 抽取运势"
+    ]
+}).command(info, "查询", {
+    "help": [
+        "#查询 用户名 模式 - 查询基本信息"
     ]
 }).start()

@@ -1,9 +1,10 @@
 import json
-import random
 import logging
+import random
 from pathlib import Path
 
 from pycqBot.cqApi import Message
+
 
 def load_sticks(FILE_NAME="sticks.json", DIR_NAME="asset"):
     file_path = Path(DIR_NAME, FILE_NAME)
