@@ -2,6 +2,7 @@ import json
 import logging
 import random
 from pathlib import Path
+import datetime
 
 from pycqBot.cqApi import Message
 
@@ -18,7 +19,7 @@ def load_sticks(FILE_NAME="sticks.json", DIR_NAME="asset"):
     
     return all_sticks
 
-def parctice_divination(QID, FILE_NAME="record.json", DIR_NAME="data\\divinations"):
+def parctice_divination(QID, FILE_NAME=f"record{datetime.datetime.now().strftime('%Y-%m-%d')}.json", DIR_NAME="data\\divinations"):
     file_path = Path(DIR_NAME, FILE_NAME)
     msg = ""
     QID = str(QID)
