@@ -19,7 +19,7 @@ def load_sticks(FILE_NAME="sticks.json", DIR_NAME="asset"):
     
     return all_sticks
 
-def parctice_divination(QID, FILE_NAME=None, DIR_NAME="data\\divinations"):
+def parctice_divination(QID, FILE_NAME=None, DIR_NAME="data/divinations"):
     if FILE_NAME is None:
         FILE_NAME = f"record{datetime.datetime.now().strftime('%Y-%m-%d')}.json"
     file_path = Path(DIR_NAME, FILE_NAME)
