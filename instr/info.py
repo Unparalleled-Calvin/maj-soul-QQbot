@@ -1,8 +1,9 @@
-from pycqBot.cqApi import Message
-from functools import cmp_to_key
-import requests
-import time
 import numbers
+import time
+from functools import cmp_to_key
+
+import requests
+from pycqBot.cqApi import Message
 
 mode_names = {
     3: "三人麻将",

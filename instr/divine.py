@@ -1,8 +1,8 @@
+import datetime
 import json
 import logging
 import random
 from pathlib import Path
-import datetime
 
 from pycqBot.cqApi import Message
 
