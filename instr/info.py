@@ -24,10 +24,8 @@ def search_basic_info(name, mode=3):
     url = f"https://3.data.amae-koromo.com/api/v2/pl{mode}/search_player/{name}?limit=5"
     response = session.get(url)
     content = response.json()
-    if len(content) < 1:
-        return {}
-    else:
-        return content[0]
+    assert(len(content) > 0)
+    return content[0]
 
 def search_detailed_info(id, mode="3", start=1262304000000, end=int(time.time()*1000)):
     session = requests.Session()
@@ -87,10 +85,10 @@ def info(commandData, message: Message):
         basic_info = search_basic_info(name, mode=mode)
         detailed_info = search_detailed_info(basic_info["id"], mode=mode)
         message.reply(detailed_info)
-    except KeyError:
+    except AssertionError:
         message.reply(f"未查到玩家{name}的相关信息，请确保其{mode_names[mode]}段位达到雀杰及以上！")
-    except:
-        message.reply("服务器出错！")
+    except Exception as e:
+        message.reply(f"服务器出错: {e}")
 
 def recent(commandData, message: Message):
     try:
@@ -114,5 +112,7 @@ def recent(commandData, message: Message):
         basic_info = search_basic_info(name, mode=mode)
         recent_info = search_recent_info(basic_info["id"], mode=mode, num=num, indetail=indetail)
         message.reply(recent_info)
-    except:
-        message.reply("服务器出错！")
+    except AssertionError:
+        message.reply(f"未查到玩家{name}的相关信息，请确保其{mode_names[mode]}段位达到雀杰及以上！")
+    except Exception as e:
+        message.reply(f"服务器出错: {e}")
