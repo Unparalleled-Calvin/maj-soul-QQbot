@@ -64,13 +64,14 @@ def search_recent_info(id, mode="3", num=10, indetail=False, start=1262304000000
     msgs = [f"以下倒序呈现{mode_names[mode]}金之间及以上最近{len(content)}场比赛数据"]
     for record in content:
         players = sorted(record["players"], key=cmp_to_key(lambda x, y: -x["score"] + y["score"]))
+        record_time = time.strftime('%Y/%m/%d %H:%M', time.localtime(record["endTime"]))
         for i in range(len(players)):
             player = players[i]
             if player["accountId"] == id:
                 if indetail:
-                    msgs.append(f"{order[i]}，点数: {player['score']}，积分: {player['gradingScore']}，牌谱: {record['uuid']}")
+                    msgs.append(f"{record_time}，{order[i]}，点数: {player['score']}，积分: {player['gradingScore']}，牌谱: {record['uuid']}")
                 else:
-                    msgs.append(f"{order[i]}，点数: {player['score']}，积分: {player['gradingScore']}")
+                    msgs.append(f"{record_time}，{order[i]}，点数: {player['score']}，积分: {player['gradingScore']}")
     return "\n".join(msgs)
 
 def info(commandData, message: Message):
