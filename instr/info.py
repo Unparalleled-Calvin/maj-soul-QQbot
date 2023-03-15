@@ -30,11 +30,12 @@ def search_basic_info(name, mode=3):
 def search_detailed_info(id, mode="3", start=1262304000000, end=int(time.time()*1000)):
     session = requests.Session()
     mode = int(mode)
+    headers = {'Cache-Control': 'no-cache'}
     if mode == 3:
         url = f"https://1.data.amae-koromo.com/api/v2/pl3/player_extended_stats/{id}/{start}/{end}?mode=21,22,23,24,25,26"
     else:
         url = f"https://1.data.amae-koromo.com/api/v2/pl4/player_extended_stats/{id}/{start}/{end}?mode=8,9,11,12,15,16"
-    response = session.get(url)
+    response = session.get(url, headers=headers)
     content = response.json()
     msgs = [f"以下仅统计{mode_names[mode]}金之间及以上比赛数据"]
     try:
@@ -55,11 +56,12 @@ def search_recent_info(id, mode="3", num=10, indetail=False, start=1262304000000
     session = requests.Session()
     id = int(id)
     mode = int(mode)
+    headers = {'Cache-Control': 'no-cache'}
     if mode == 3:
         url = f"https://1.data.amae-koromo.com/api/v2/pl3/player_records/{id}/{end}/{start}?limit={num}&mode=21,22,23,24,25,26&descending=true"
     else:
         url = f"https://1.data.amae-koromo.com/api/v2/pl4/player_records/{id}/{end}/{start}?limit={num}&mode=8,9,11,12,15,16&descending=true"
-    response = session.get(url)
+    response = session.get(url, headers=headers)
     content = response.json()
     msgs = [f"以下倒序呈现{mode_names[mode]}金之间及以上最近{len(content)}场比赛数据"]
     for record in content:
