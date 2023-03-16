@@ -27,8 +27,10 @@ def search_basic_info(name, mode=3):
     assert(len(content) > 0)
     return content[0]
 
-def search_detailed_info(id, mode="3", start=1262304000000, end=int(time.time()*1000)):
+def search_detailed_info(id, mode="3", start=1262304000000, end=None):
     session = requests.Session()
+    if end is None:
+        end = int(time.time()*1000)
     mode = int(mode)
     headers = {'Cache-Control': 'no-cache'}
     if mode == 3:
@@ -52,8 +54,10 @@ def search_detailed_info(id, mode="3", start=1262304000000, end=int(time.time()*
             msgs.append(f"{key}: {'%.2f'%(value) if isinstance(value, float) else value}")
     return "\n".join(msgs)
 
-def search_recent_info(id, mode="3", num=10, indetail=False, start=1262304000000, end=int(time.time()*1000)):
+def search_recent_info(id, mode="3", num=10, indetail=False, start=1262304000000, end=None):
     session = requests.Session()
+    if end is None:
+        end = int(time.time()*1000)
     id = int(id)
     mode = int(mode)
     headers = {'Cache-Control': 'no-cache'}
